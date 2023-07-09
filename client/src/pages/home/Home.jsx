@@ -2,7 +2,7 @@ import React from "react";
 import "./Home.scss";
 import Featured from "../../components/featured/Featured";
 import Slide from "../../components/Slide/Slide";
-import CategoryCard from "../../components/categoryCard/categoryCard";
+import CategoryCard from "../../components/categoryCard/CategoryCard";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import { cards } from "../../data";
 import { Link } from "react-router-dom";
