@@ -35,13 +35,14 @@ const Register = () => {
     setIsLoading(true);
     const url = await upload(file);
     try {
-      await newRequest.post("/auth/register", {
+      const res = await newRequest.post("/auth/register", {
         ...user,
         img: url,
       });
+      localStorage.setItem("currentUser", JSON.stringify(res.data));
+      navigate("/");
       setError(null);
       setIsLoading(false);
-      navigate("/");
     } catch (err) {
       setError(err);
       setIsLoading(false);

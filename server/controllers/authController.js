@@ -17,11 +17,20 @@ export const register = async (req, res, next) => {
       ...req.body,
       password: hash,
     });
-    await newUser.save();
-    const { password, ...info } = newUser._doc;
+    const newuse = await newUser.save();
+
+    const token = jwt.sign(
+      {
+        id: newuse._id,
+        isSeller: newuse.isSeller,
+      },
+      process.env.JWT_KEY
+    );
+
+    const { password, ...info } = newuse._doc;
     res.status(200).json({ result: info, token });
   } catch (err) {
-    next(createError(400, "Please fill all the required fields"));
+    next(err);
   }
 };
 
