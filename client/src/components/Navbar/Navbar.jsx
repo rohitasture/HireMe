@@ -42,8 +42,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
-      await newRequest.post("/auth/logout");
-      localStorage.setItem("currentUser", null);
+      // await newRequest.post("/auth/logout");
+      localStorage.clear();
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -67,18 +67,18 @@ const Navbar = () => {
           <Link to="/#about" className="link">
             <span>About</span>
           </Link>
-          {!currentUser?.isSeller && (
+          {!currentUser?.result?.isSeller && (
             <Link to="/register" className="link">
               <span>Create a Seller Account</span>
             </Link>
           )}
-          {currentUser ? (
+          {currentUser?.result ? (
             <div className="user" onClick={() => setOpen(!open)}>
-              <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
-              <span>{currentUser?.username}</span>
+              <img src={currentUser.result.img || "/img/noavatar.jpg"} alt="" />
+              <span>{currentUser.result.username}</span>
               {open && (
                 <div className="options">
-                  {currentUser.isSeller && (
+                  {currentUser.result.isSeller && (
                     <>
                       <Link className="link" to="/myservices">
                         Services

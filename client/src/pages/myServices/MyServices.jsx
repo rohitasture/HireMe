@@ -10,9 +10,11 @@ const MyServices = () => {
   const { isLoading, error, data } = useQuery({
     queryKey: ["myServices"],
     queryFn: () =>
-      newRequest.get(`/services?userId=${currentUser._id}`).then((res) => {
-        return res.data;
-      }),
+      newRequest
+        .get(`/services?userId=${currentUser?.result._id}`)
+        .then((res) => {
+          return res.data;
+        }),
   });
 
   const mutation = useMutation({
@@ -38,7 +40,7 @@ const MyServices = () => {
         <div className="container">
           <div className="title">
             <h1>MyServices</h1>
-            {currentUser.isSeller && (
+            {currentUser?.result.isSeller && (
               <Link to="/addservice">
                 <button>Add New Service</button>
               </Link>

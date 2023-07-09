@@ -48,22 +48,25 @@ const Message = () => {
             {data.map((message) => (
               <div
                 className={
-                  message.userId === currentUser._id ? "item owner" : "item"
+                  message.userId === currentUser.result._id
+                    ? "item owner"
+                    : "item"
                 }
                 key={message._id}
               >
-                {currentUser.isSeller && message.userId === currentUser._id ? (
+                {currentUser.result.isSeller &&
+                message.userId === currentUser.result._id ? (
                   <img
-                    src={currentUser.img || "/img/noavatar.jpg"}
+                    src={currentUser.result.img || "/img/noavatar.jpg"}
                     alt="seller"
                     title="seller"
                   />
-                ) : currentUser.isSeller ? (
+                ) : currentUser.result.isSeller ? (
                   <img src="/img/buyer.png" alt="buyer" title="buyer" />
-                ) : !currentUser.isSeller &&
-                  message.userId === currentUser._id ? (
+                ) : !currentUser.result.isSeller &&
+                  message.userId === currentUser.result._id ? (
                   <img
-                    src={currentUser.img || "/img/noavatar.jpg"}
+                    src={currentUser.result.img || "/img/noavatar.jpg"}
                     alt="buyer"
                     title="buyer"
                   />

@@ -18,7 +18,8 @@ export const register = async (req, res, next) => {
       password: hash,
     });
     await newUser.save();
-    res.status(201).send("User has been created");
+    const { password, ...info } = newUser._doc;
+    res.status(200).json({ result: info, token });
   } catch (err) {
     next(createError(400, "Please fill all the required fields"));
   }
@@ -42,23 +43,14 @@ export const login = async (req, res, next) => {
       process.env.JWT_KEY
     );
     const { password, ...info } = user._doc;
-    res
-      .cookie("accesstoken", token, {
-        httpOnly: true,
-      })
-      .status(200)
-      .send(info);
+    res.status(200).json({ result: info, token });
   } catch (err) {
     next(err);
   }
 };
 
-export const logout = async (req, res) => {
-  res
-    .clearCookie("accesstoken", {
-      sameSite: "none",
-      secure: true,
-    })
-    .status(200)
-    .send("User has been logged out.");
-};
+// export const logout = async (req, res) => {
+//   res
+//     .status(200)
+//     .send("User has been logged out.");
+// };

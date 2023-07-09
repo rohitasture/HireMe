@@ -40,11 +40,6 @@ const Register = () => {
         img: url,
       });
       setError(null);
-      const res = await newRequest.post("/auth/login", {
-        username: user.username,
-        password: user.password,
-      });
-      localStorage.setItem("currentUser", JSON.stringify(res.data));
       setIsLoading(false);
       navigate("/");
     } catch (err) {

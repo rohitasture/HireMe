@@ -42,7 +42,7 @@ const Messages = () => {
           </div>
           <table>
             <tr>
-              <th>{currentUser.isSeller ? "Buyer" : "Seller"}</th>
+              <th>{currentUser?.result.isSeller ? "Buyer" : "Seller"}</th>
               <th>Last Message</th>
               <th>Date</th>
               <th>Action</th>
@@ -50,14 +50,16 @@ const Messages = () => {
             {data.map((conversation) => (
               <tr
                 className={
-                  ((currentUser.isSeller && !conversation.readbySeller) ||
-                    (!currentUser.isSeller && !conversation.readbyBuyer)) &&
+                  ((currentUser?.result.isSeller &&
+                    !conversation.readbySeller) ||
+                    (!currentUser?.result.isSeller &&
+                      !conversation.readbyBuyer)) &&
                   "active"
                 }
                 key={conversation.id}
               >
                 <td>
-                  {currentUser.isSeller
+                  {currentUser?.result.isSeller
                     ? conversation.buyerId
                     : conversation.sellerId}
                 </td>
@@ -68,8 +70,10 @@ const Messages = () => {
                 </td>
                 <td>{moment(conversation.updatedAt).fromNow()}</td>
                 <td>
-                  {((currentUser.isSeller && !conversation.readbySeller) ||
-                    (!currentUser.isSeller && !conversation.readbyBuyer)) && (
+                  {((currentUser?.result.isSeller &&
+                    !conversation.readbySeller) ||
+                    (!currentUser?.result.isSeller &&
+                      !conversation.readbyBuyer)) && (
                     <button onClick={() => handleRead(conversation.id)}>
                       Mark as Read
                     </button>

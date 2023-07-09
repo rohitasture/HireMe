@@ -45,7 +45,7 @@ const Reviews = ({ serviceId }) => {
         ? "Something Went Wrong!!!"
         : data.map((review) => <Review key={review._id} review={review} />)}
       <hr />
-      {currentUser ? (
+      {currentUser?.result ? (
         <div>
           <div className="add">
             <h3>Add a new Review</h3>
