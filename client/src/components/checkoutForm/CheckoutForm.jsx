@@ -50,7 +50,7 @@ const CheckoutForm = () => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${import.meta.env.VITE_REACT_CLIENT_URL}/success`,
+        return_url: `${import.meta.env.VITE_REACT_APP_CLIENT_URL}/success`,
       },
     });
 
