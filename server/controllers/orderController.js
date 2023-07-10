@@ -33,22 +33,25 @@ export const intent = async (req, res, next) => {
 
 export const confirmOrder = async (req, res, next) => {
   try {
+    const oldOrder = await Order.findOne({
+      payment_intent: req.body.payment_intent,
+    });
+    if (!oldOrder.isCompleted) {
+      await Service.findByIdAndUpdate(oldOrder.serviceId, {
+        $inc: {
+          sales: 1,
+        },
+      });
+    }
     const orders = await Order.findOneAndUpdate(
       { payment_intent: req.body.payment_intent },
       {
         $set: {
           isCompleted: true,
         },
-      },
-      {
-        new: true,
       }
     );
-    await Service.findByIdAndUpdate(orders.serviceId, {
-      $inc: {
-        sales: 1,
-      },
-    });
+
     res.status(200).send("Order has been Confirmed!!");
   } catch (err) {
     next(err);

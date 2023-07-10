@@ -168,7 +168,7 @@ const Service = () => {
                 </div>
               ))}
             </div>
-            {!currentUser?.isSeller && currentUser ? (
+            {!currentUser?.result?.isSeller && currentUser?.result ? (
               <Link to={`/pay/${id}`}>
                 <button>Continue</button>
               </Link>
