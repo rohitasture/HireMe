@@ -26,7 +26,10 @@ const ServiceCard = ({ item }) => {
               <span>{data.username}</span>
             </div>
           )}
-          <p>{item.desc}</p>
+          <p>
+            <strong>{item.title}</strong>: {item.desc.substr(0, 20)}
+            {item.desc.length > 20 && "..."}
+          </p>
           <div className="star">
             <img src="./img/star.png" alt="" />
             <span>
