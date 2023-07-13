@@ -58,7 +58,7 @@ const Register = () => {
           <input
             name="username"
             type="text"
-            placeholder="johndoe"
+            placeholder="username"
             onChange={handleChange}
           />
           <label htmlFor="">Email</label>
@@ -76,7 +76,7 @@ const Register = () => {
           <input
             name="country"
             type="text"
-            placeholder="Usa"
+            placeholder="India"
             onChange={handleChange}
           />
           <button type="submit">{isLoading ? "Loading..." : "Register"}</button>
@@ -94,7 +94,7 @@ const Register = () => {
           <input
             name="phone"
             type="text"
-            placeholder="+1 234 567 89"
+            placeholder="+91 0123456789"
             onChange={handleChange}
           />
           <label htmlFor="">Description</label>
